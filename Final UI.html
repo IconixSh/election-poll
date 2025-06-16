@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* Global dark pastel colors */
+        --bg-main: #23263a;
+        --text-main: #e3e8f7;
+        --text-heading: #f3f4fa;
+        --text-secondary: #b6b9d6;
+
+        /* Ballot container */
+        --ballot-container-bg: #2d314a;
+        --ballot-container-border: #184a8b;
+        --ballot-container-shadow: 0 2px 32px #15162a99;
+
+        /* Ballot header */
+        --ballot-header-bg: #3c4060;
+        --ballot-header-text: #f3f4fa;
+        --ballot-header-shadow: 0 2px 12px #15162a66;
+
+        /* Ballot title/info */
+        --ballot-title-text: #f3f4fa;
+        --ballot-info-text: #b6b9d6;
+
+        /* Instructions */
+        --instructions-bg: #23263a;
+        --instructions-text: #e3e8f7;
+        --instructions-title-text: #b6b9d6;
+        --instructions-border: #1bc5ae;
+
+        /* Race section */
+        --race-header-border: #4e5370;
+        --race-title-text: #f3f4fa;
+        --race-subtitle-text: #b6b9d6;
+
+        /* Candidate option */
+        --candidate-option-bg: #23263a;
+        --candidate-option-border: #1b7599;
+        --candidate-option-text: #e3e8f7;
+        --candidate-option-shadow: 0 4px 16px #15162a44;
+        --candidate-option-hover-bg: #2d314a;
+        --candidate-option-hover-border: #1b7599;
+        --candidate-option-hover-shadow: #15162a66;
+        --candidate-option-selected-bg: #23263a;
+        --candidate-option-selected-border: #1b7599;
+        --candidate-option-selected-shadow: #b6b9d655;
+
+        /* Candidate logo */
+        --candidate-logo-bg: #ffffff;
+        --candidate-logo-text: #f3f4fa;
+
+        /* Indicator light */
+        --indicator-bg: #23263a;
+        --indicator-border: #b6b9d6;
+        --indicator-inner-bg: #2d314a;
+        --indicator-dot-bg: #4e5370;
+        --indicator-selected-bg: #d11c1c;
+        --indicator-selected-border: #b30404;
+        --indicator-selected-inner-bg: #7a0303;
+        --indicator-selected-dot-bg: #eb1c1c;
+
+        /* Selection button */
+        --selection-button-bg: #3B82F6;
+        --selection-button-text: #E5E7EB;
+        --selection-button-shadow: #15162a44;
+        --selection-button-hover-bg: #2b5cac;
+        --selection-button-hover-shadow: #7c80a755;
+
+        /* Submit section/button */
+        --submit-section-border: #4e5370;
+        --submit-button-bg: #3c4060;
+        --submit-button-text: #f3f4fa;
+        --submit-button-shadow: #15162a44;
+        --submit-button-hover-bg: #1f75bb;
+
+        /* Popup */
+        --popup-bg: #2d314a;
+        --popup-text: #e3e8f7;
+        --popup-h2-text: #b6b9d6;
+        --popup-btn-bg: #3c4060;
+        --popup-btn-text: #f3f4fa;
+
+        /* Progress bar */
+        --progress-bar-bg: #23263a;
+        --progress-bar-border: #4e5370;
+        --progress-bar-fill-bg: #4e5370;
+        --progress-bar-fill-shadow: #b6b9d655;
+      }
+
+      body, html {
+        background: var(--bg-main);
+        color: var(--text-main);
+        font-family: 'Chivo', Arial, sans-serif;
+      }
+
+      .ballot-container, .ballot-page {
+        background: var(--ballot-container-bg) !important;
+        border-radius: 24px;
+        box-shadow: var(--ballot-container-shadow);
+        border: 1.5px solid var(--ballot-container-border);
+      }
+
+      .ballot-header {
+        background: var(--ballot-header-bg) !important;
+        color: var(--ballot-header-text) !important;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+        box-shadow: var(--ballot-header-shadow);
+      }
+
+      .ballot-title {
+        color: var(--ballot-title-text) !important;
+        font-size: 32px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        letter-spacing: 2px;
+        text-shadow: none;
+      }
+
+      .election-info,
+      .voting-instruction {
+        color: var(--ballot-info-text) !important;
+      }
+
+      .instructions-section {
+        background: var(--instructions-bg) !important;
+        color: var(--instructions-text) !important;
+        border-bottom: 1px solid var(--instructions-border);
+        padding: 15px 20px;
+      }
+
+      .instructions-title {
+        color: var(--instructions-title-text) !important;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+      }
+
+      .instructions-text {
+        color: var(--instructions-text);
+        font-size: 14px;
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      .race-section {
+        padding: 20px;
+      }
+
+      .race-header {
+        text-align: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid var(--race-header-border);
+        padding-bottom: 10px;
+      }
+
+      .race-title {
+        color: var(--race-title-text) !important;
+        font-size: 30px;
+        font-weight: bold;
+        margin: 0 0 5px 0;
+      }
+
+      .race-subtitle {
+        color: var(--race-subtitle-text) !important;
+        font-size: 14px;
+        margin: 0;
+      }
+
+      .candidates-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px; /* horizontal gap remains small */
+        width: 100%;
+        row-gap: 8px; /* reduce vertical gap between rows */
+      }
+
+      .candidate-option {
+        background: var(--candidate-option-bg) !important;
+        border: 2px solid var(--candidate-option-border) !important;
+        color: var(--candidate-option-text) !important;
+        border-radius: 20px;
+        box-shadow: var(--candidate-option-shadow);
+        min-height: 240px;
+        padding: 48px 40px;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 0; /* remove extra vertical spacing */
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+      }
+      .candidate-option:hover {
+        background: var(--candidate-option-hover-bg) !important;
+        border-color: var(--candidate-option-hover-border) !important;
+        box-shadow: 0 0 16px 4px var(--candidate-option-hover-shadow);
+      }
+      .candidate-option.selected {
+        background: var(--candidate-option-selected-bg) !important;
+        border: 2px solid var(--candidate-option-selected-border) !important;
+        box-shadow: 0 0 24px 2px var(--candidate-option-selected-shadow);
+      }
+
+      .candidate-option .candidate-name,
+      .candidate-option .candidate-details {
+        font-size: 2rem; /* Increased text size for candidate name/details */
+        color: var(--candidate-option-text) !important;
+        font-weight: bold;
+        text-shadow: none;
+        letter-spacing: 0.5px;
+      }
+
+      .candidate-logo {
+        width: 200px;
+        height: 200px;
+        background: var(--candidate-logo-bg) !important;
+        color: var(--candidate-logo-text) !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 64px; /* Optional: scale up icon/text inside */
+        font-weight: bold;
+        flex-shrink: 0;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px var(--candidate-option-shadow);
+      }
+
+      .candidate-name {
+        color: var(--candidate-option-text) !important;
+        font-size: 20px;
+        font-weight: bold;
+        flex-grow: 1;
+      }
+
+      .voting-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-direction: row;
+        position: relative;
+      }
+
+      .indicator-light {
+        width: 35px;
+        height: 35px;
+        background: var(--indicator-bg);
+        border: 3px solid var(--indicator-border) !important;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        position: relative;
+        box-shadow: 0 4px 18px 6px #fff7, 0 2px 12px var(--candidate-option-shadow); /* brighter */
+        order: 0;
+      }
+      .indicator-light::before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        background: var(--indicator-inner-bg);
+        border-radius: 50%;
+        box-shadow: 0 0 18px 6px #fff5, inset 0 1px 2px #fff4, inset 0 -1px 2px #a6b1e122;
+      }
+      .indicator-light::after {
+        content: "";
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        background: var(--indicator-dot-bg);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 24px 10px #fff8, inset 0 1px 3px #fff3, inset 0 -1px 3px #a6b1e122;
+      }
+      .candidate-option.selected .indicator-light {
+        background: var(--indicator-selected-bg);
+        border-color: var(--indicator-selected-border);
+        box-shadow: 0 0 20px var(--indicator-selected-bg), 0 2px 6px #dc262655;
+        animation: ledPulse 2s infinite;
+      }
+      .candidate-option.selected .indicator-light::before {
+        background: var(--indicator-selected-inner-bg);
+        box-shadow: inset 0 1px 2px #fecaca, inset 0 -1px 2px #dc2626;
+      }
+      .candidate-option.selected .indicator-light::after {
+        background: var(--indicator-selected-dot-bg);
+        box-shadow: 0 1px 3px #fecaca, 0 -1px 3px #dc2626, 0 0 15px #dc2626, 0 0 25px #dc2626;
+      }
+
+      @keyframes ledPulse {
+        0%, 100% {
+          box-shadow: 0 0 20px #dc2626, 0 2px 6px #dc262655;
+        }
+        50% {
+          box-shadow: 0 0 30px #dc2626, 0 0 40px #dc2626, 0 2px 6px #dc262655;
+        }
+      }
+
+      .selection-button {
+        height: 100%;
+        min-height: 80px;
+        min-width: 160px;
+        font-size: 1.5rem;
+        padding: 0 32px;
+        border-radius: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        background: var(--selection-button-bg) !important;
+        color: var(--selection-button-text) !important;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 3px 10px var(--selection-button-shadow);
+        order: 1;
+      }
+      .selection-button:hover,
+      .candidate-option.selected .selection-button {
+        background: var(--selection-button-hover-bg) !important;
+        color: var(--selection-button-text) !important;
+        box-shadow: 0 0 12px 2px var(--selection-button-hover-shadow);
+      }
+
+      .submit-section {
+        padding: 30px;
+        text-align: center;
+        border-top: 1px solid var(--submit-section-border);
+      }
+
+      .submit-button {
+        background: var(--submit-button-bg) !important;
+        color: var(--submit-button-text) !important;
+        border: none;
+        border-radius: 8px;
+        padding: 16px 40px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 2px 8px var(--submit-button-shadow);
+        transition: background 0.2s, box-shadow 0.2s;
+      }
+      .submit-button:hover {
+        background: var(--submit-button-hover-bg) !important;
+        box-shadow: 0 0 12px 2px #dc262655;
+      }
+      .submit-button:disabled {
+        background: #4e5370;
+        cursor: not-allowed;
+      }
+
+      #thankyou-popup .popup-content {
+        background: var(--popup-bg) !important;
+        color: var(--popup-text) !important;
+        box-shadow: 0 8px 32px #15162a44 !important;
+      }
+      #thankyou-popup h2 {
+        color: var(--popup-h2-text) !important;
+      }
+      #thankyou-popup .popup-btn {
+        background: var(--popup-btn-bg) !important;
+        color: var(--popup-btn-text) !important;
+      }
+
+      .progress-bar-container {
+        width: 900px;      /* longer */
+        height: 48px;      /* leaner */
+        background: var(--progress-bar-bg);
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 1px 24px #a6b1e144;
+        border: 3px solid var(--progress-bar-border);
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--progress-bar-fill-bg);
+        border-radius: 32px 0 0 32px;
+        transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
+        box-shadow: 0 0 24px var(--progress-bar-fill-shadow);
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: bold;
+      }
+      @media (max-width: 1000px) {
+        .progress-bar-container {
+          width: 98vw;
+          min-width: 0;
+          height: 36px;
+          border-radius: 20px;
+        }
+        .progress-bar-fill {
+          border-radius: 20px 0 0 20px;
+          font-size: 1.1rem;
+        }
+      }
+
+      /* In your CSS file, target the VOTE text inside the selection button */
+.selection-button .vote-text {
+  font-family: 'Graduate', cursive;
+  color: #7b6cf6; /* Soft pastel purple */
+  background: none;
+  letter-spacing: 1px;
+}
+    </style>
+  </head>
+  <body>
+  {% load static %}
+<!-- Welcome Step -->
+<div class="ballot-container ballot-page" id="welcome-step" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 600px;">
+  <h1 style="font-size: 2.5rem; margin-bottom: 24px;">National Public School General Elections 2025</h1>
+  <p style="font-size: 1.2rem; margin-bottom: 32px;"><br></p>
+  <button class="submit-button" style="font-size: 1.3rem; padding: 18px 48px;" onclick="showStep('bspl')">Enter Your Vote</button>
+</div>
+
+<!-- Main Ballot Pages -->
+<div class="ballot-container ballot-page" id="page-1" style="display: none;">
+  <!-- Header for all ballot steps -->
+  <h1 style="font-size: 2.2rem; margin-bottom: 18px; text-align:center;">National Public School General Elections 2025</h1>
+
+  <!-- BSPL Step -->
+  <div id="ballot-bspl" class="ballot-step">
+    <h2 style="font-size: 2rem; margin-bottom: 16px; text-align:center;"></h2>
+    <div class="race-section">
+          <div class="race-header">
+            <h2 class="race-title">BOY SPL</h2>
+            <p class="race-subtitle">Vote for one (1)</p>
+          </div>
+          <div class="candidates-container">
+            <!-- 10 Placeholder Candidates for BSPL -->
+            <div class="candidate-option" data-candidate="bspl1">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name">Candidate Name</div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl2">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl3">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl4">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl5">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl6">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl7">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl8">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl9">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl10">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button
+            class="submit-button"
+            onclick="submitVote('bspl')"
+            style="display: none"
+          >
+            SUBMIT BALLOT
+          </button>
+        </div>
+  </div>
+
+  <!-- BASPL Step -->
+  <div id="ballot-baspl" class="ballot-step" style="display: none">
+    <h2 style="font-size: 2rem; margin-bottom: 16px; text-align:center;"></h2>
+    <div class="race-section">
+          <div class="race-header">
+            <h2 class="race-title">BOY ASSISTANT SPL</h2>
+            <p class="race-subtitle">Vote for one (1)</p>
+          </div>
+          <div class="candidates-container">
+            <!-- 10 Placeholder Candidates for BASPL -->
+            <div class="candidate-option" data-candidate="baspl1">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name">Candidate Name</div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl2">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl3">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl4">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl5">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl6">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl7">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl8">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl9">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl10">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button
+            class="submit-button"
+            onclick="submitVote('baspl')"
+            style="display: none"
+          >
+            SUBMIT BALLOT
+          </button>
+        </div>
+  </div>
+
+  <!-- GSPL Step -->
+  <div id="ballot-gspl" class="ballot-step" style="display: none">
+    <h2 style="font-size: 2rem; margin-bottom: 16px; text-align:center;"></h2>
+    <div class="race-section">
+          <div class="race-header">
+            <h2 class="race-title">GIRL SPL</h2>
+            <p class="race-subtitle">Vote for one (1)</p>
+          </div>
+          <div class="candidates-container">
+            <!-- 10 Placeholder Candidates for GSPL -->
+            <div class="candidate-option" data-candidate="gspl1">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name">Candidate Name</div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl2">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl3">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl4">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl5">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl6">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl7">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl8">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl9">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl10">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button
+            class="submit-button"
+            onclick="submitVote('gspl')"
+            style="display: none"
+          >
+            SUBMIT BALLOT
+          </button>
+        </div>
+  </div>
+
+  <!-- GASPL Step -->
+  <div id="ballot-gaspl" class="ballot-step" style="display: none">
+    <h2 style="font-size: 2rem; margin-bottom: 16px; text-align:center;"></h2>
+    <div class="race-section">
+          <div class="race-header">
+            <h2 class="race-title">GIRL ASSISTANT SPL</h2>
+            <p class="race-subtitle">Vote for one (1)</p>
+          </div>
+          <div class="candidates-container">
+            <!-- 10 Placeholder Candidates for GASPL -->
+            <div class="candidate-option" data-candidate="gaspl1">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name">Candidate Name</div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl2">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl3">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl4">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl5">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl6">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl7">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl8">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl9">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl10">
+              <div class="candidate-logo"></div>
+              <div class="candidate-name"></div>
+              <div class="voting-controls">
+                <span class="indicator-light"></span>
+                <button class="selection-button">
+  <span class="vote-text">VOTE</span>
+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- REMOVE the submit-section for GASPL -->
+      </div>
+    </div>
+
+    <!-- Designer Thank You Popup -->
+<div id="thankyou-popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.35); z-index:9999; align-items:center; justify-content:center;">
+  <div class="popup-content" style="background:#fff; border-radius:18px; padding:40px 32px; box-shadow:0 8px 32px #0002; min-width:320px; max-width:90vw; display:flex; flex-direction:column; align-items:center;">
+    <h2 style="color:#00b86b; margin-bottom:24px;">Your Vote has been counted</h2>
+    <div class="progress-bar-container" style="width:340px; max-width:90vw; margin-bottom:24px;">
+      <div class="progress-bar-fill" id="progress-bar-fill"></div>
+    </div>
+    <button class="popup-btn" onclick="document.getElementById('thankyou-popup').style.display='none';" style="margin-top:12px; padding:10px 28px; border:none; background:#00b86b; color:#fff; border-radius:8px; font-size:1rem; cursor:pointer;">Close</button>
+  </div>
+</div>
+
+<style>
+.progress-bar-container {
+  width: 900px;      /* longer */
+  height: 48px;      /* leaner */
+  background: #e6f7ee;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 1px 24px rgba(0,0,0,0.08);
+  border: 3px solid #b6f5d8;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00b86b 60%, #4ade80 100%);
+  border-radius: 32px 0 0 32px;
+  transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
+  box-shadow: 0 0 24px #00b86b44;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+}
+@media (max-width: 1000px) {
+  .progress-bar-container {
+    width: 98vw;
+    min-width: 0;
+    height: 36px;
+    border-radius: 20px;
+  }
+  .progress-bar-fill {
+    border-radius: 20px 0 0 20px;
+    font-size: 1.1rem;
+  }
+}
+    </style>
+
+    <script>
+function setupCandidateOptionEvents() {
+  document.querySelectorAll('.candidate-option').forEach(option => {
+    const selectionBtn = option.querySelector('.selection-button');
+    const indicator = option.querySelector('.indicator-light');
+
+    // Reset state
+    option.classList.remove('ready-to-vote');
+    selectionBtn.classList.remove('selected');
+    indicator.classList.remove('active-indicator');
+
+    // Selection button click
+    selectionBtn.onclick = (e) => {
+      e.preventDefault();
+      // Remove ready state from all options in this race
+      option.parentElement.querySelectorAll('.candidate-option').forEach(opt => {
+        opt.classList.remove('ready-to-vote');
+        opt.querySelector('.selection-button').classList.remove('selected');
+        opt.querySelector('.indicator-light').classList.remove('active-indicator');
+      });
+      // Set ready state for this option
+      option.classList.add('ready-to-vote');
+      selectionBtn.classList.add('selected');
+      indicator.classList.add('active-indicator');
+    };
+
+    // Indicator click
+    indicator.onclick = (e) => {
+      if (!option.classList.contains('ready-to-vote')) return;
+      const stepDiv = option.closest('.ballot-step');
+      const stepId = stepDiv ? stepDiv.id.replace('ballot-', '') : null;
+      if (stepId) {
+        selections[stepId] = option.getAttribute('data-candidate');
+        if (stepId === "gaspl") {
+          // Show thank you popup with progress bar
+          showThankYouPopup(75, false); // 75% progress, no label
+        } else {
+          submitVote(stepId);
+        }
+      }
+    };
+  });
+}
+
+// Set progress bar to a specific percent (0-100), optionally show label
+function setProgressBar(percent, showLabel = true) {
+  const fill = document.getElementById('progress-bar-fill');
+  if (fill) {
+    fill.style.width = percent + '%';
+    fill.textContent = showLabel ? (percent + '%') : '';
+  }
+}
+
+// Show thank you popup with animated progress bar, optionally hide label
+function showThankYouPopup(percent = 100, showLabel = true) {
+  document.getElementById('thankyou-popup').style.display = 'flex';
+  // Animate progress bar
+  let container = document.querySelector('#thankyou-popup .progress-bar-container');
+  container.innerHTML = '<div class="progress-bar-fill" id="progress-bar-fill"></div>';
+  setTimeout(() => {
+    setProgressBar(percent, showLabel);
+  }, 100);
+}
+
+// Call after DOM is ready and after each step is shown
+document.addEventListener('DOMContentLoaded', setupCandidateOptionEvents);
+
+// Also call after showing each step
+function showStep(step) {
+  // Hide all ballot pages
+  document.querySelectorAll('.ballot-page').forEach(page => page.style.display = 'none');
+  // Hide all ballot steps
+  document.querySelectorAll('.ballot-step').forEach(stepDiv => stepDiv.style.display = 'none');
+
+  if (step === "welcome-step") {
+    document.getElementById("welcome-step").style.display = "flex";
+  } else {
+    document.getElementById("welcome-step").style.display = "none";
+    document.getElementById("page-1").style.display = "block";
+    document.getElementById(`ballot-${step}`).style.display = "block";
+    currentStep = step;
+    setupCandidateOptionEvents(); // <-- Add this line
+  }
+}
+
+// Store selections as an object (or use an array if you prefer)
+let selections = {
+  bspl: null,
+  baspl: null,
+  gspl: null,
+  gaspl: null,
+};
+let currentStep = "bspl";
+const steps = ["bspl", "baspl", "gspl", "gaspl"];
+
+// Attach click handlers to all candidate options for all steps
+steps.forEach((step, idx) => {
+document.querySelectorAll(`#ballot-${step} .candidate-option`).forEach(option => {
+  option.addEventListener("click", () => {
+    // Deselect all in this step
+    document.querySelectorAll(`#ballot-${step} .candidate-option`).forEach(opt => opt.classList.remove("selected"));
+    option.classList.add("selected");
+
+    // Get candidate ID and name
+    const candidateId = option.dataset.candidate || option.dataset.candidateId;
+    const candidateName = option.querySelector('.candidate-name')?.textContent || option.children[1]?.textContent || "";
+
+    selections[step] = candidateName;
+    uuid[step] = candidateId;
+
+    // Register vote for this candidate
+    voteForCandidate(candidateId);
+
+    if (step === "gaspl") {
+      // On last step, show thank you popup and reset after close
+      document.getElementById("thankyou-popup").style.display = "flex";
+      setTimeout(() => {
+        document.getElementById("progress-bar-fill").style.width = "5%";
+      }, 200);
+
+      document.querySelector("#thankyou-popup .popup-btn").onclick = function() {
+        document.getElementById("thankyou-popup").style.display = "none";
+        // Reset selections for a new round
+        selections = { bspl: null, baspl: null, gspl: null, gaspl: null };
+        uuid = { bspl: null, baspl: null, gspl: null, gaspl: null };
+        document.querySelectorAll(".candidate-option").forEach((opt) => {
+          opt.classList.remove("selected");
+          opt.style.pointerEvents = "";
+          opt.style.opacity = "";
+        });
+        document.getElementById("progress-bar-fill").style.width = "0%";
+        showStep("welcome-step");
+      };
+    } else {
+      // Go to next step after a short delay for visual feedback
+      setTimeout(() => showStep(steps[idx + 1]), 200);
+    }
+  });
+});
+});
+
+      // Enable/disable next button based on selection
+      function updateNextButton(step) {
+        const nextButton = document.querySelector(
+          `#ballot-${step} .next-button`
+        );
+        if (nextButton) {
+          nextButton.disabled = !selections[step];
+        }
+      }
+
+      // Submit logic for each step (no disabling, just go to next step)
+      function submitVote(step) {
+  if (!selections[step]) {
+    return;
+  }
+  if (step === "gaspl") {
+    for (step in uuid) {
+      voteForCandidate(uuid[step]);
+    }
+    // Show the popup with progress bar and message
+    document.getElementById("thankyou-popup").style.display = "flex";
+    document.querySelectorAll(".candidate-option").forEach((option) => {
+      option.style.pointerEvents = "none";
+      option.style.opacity = "0.7";
+    });
+    document.querySelectorAll(".submit-button").forEach((btn) => {
+      btn.disabled = true;
+      btn.textContent = "BALLOT SUBMITTED";
+    });
+
+    // Animate the progress bar to a small visible amount (e.g., 5%)
+    setTimeout(() => {
+      document.getElementById("progress-bar-fill").style.width = "5%";
+    }, 200);
+  } else {
+    const idx = steps.indexOf(step);
+    showStep(steps[idx + 1]);
+  }
+}
+
+      // Show the correct step/page by id
+      function showStep(step) {
+          // Hide all ballot pages
+          document.querySelectorAll('.ballot-page').forEach(page => page.style.display = 'none');
+          // Hide all ballot steps
+          document.querySelectorAll('.ballot-step').forEach(stepDiv => stepDiv.style.display = 'none');
+
+          if (step === "welcome-step") {
+            document.getElementById("welcome-step").style.display = "flex";
+          } else {
+            document.getElementById("welcome-step").style.display = "none";
+            document.getElementById("page-1").style.display = "block";
+            document.getElementById(`ballot-${step}`).style.display = "block";
+            currentStep = step;
+            setupCandidateOptionEvents(); // <-- Add this line
+          }
+        }
+
+      // Next step logic
+      function goToStep(step) {
+        showStep(step);
+      }
+
+      function goNextStep() {
+        const idx = steps.indexOf(currentStep);
+        if (idx < steps.length - 1) {
+          showStep(steps[idx + 1]);
+        }
+      }
+
+      // Back step logic
+      function goBackStep() {
+        const idx = steps.indexOf(currentStep);
+        if (idx > 0) {
+          showStep(steps[idx - 1]);
+        }
+      }
+
+      // Initialize: show welcome screen first
+      showStep("welcome-step");
+    </script>
+    <script>
+  // Add this script after your DOM is loaded and after your other JS
+  document.addEventListener('DOMContentLoaded', function () {
+    // For all selection buttons
+    document.querySelectorAll('.selection-button').forEach(function(btn) {
+      // Remove any text inside the button initially
+      btn.textContent = '';
+      btn.addEventListener('click', function () {
+        // Remove "VOTE" from all selection buttons in the same container
+        const container = btn.closest('.candidates-container');
+        if (container) {
+          container.querySelectorAll('.selection-button').forEach(function(b) {
+            b.textContent = '';
+          });
+        }
+        // Set this button's text to "VOTE"
+        btn.textContent = 'VOTE';
+      });
+    });
+  });
+</script>
+<script>
+  // Add this after your other DOMContentLoaded or popup code
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.addEventListener('click', function (e) {
+      if (e.target && e.target.classList.contains('popup-btn')) {
+        // Hide the popup
+        const popup = document.getElementById('thankyou-popup');
+        if (popup) popup.style.display = 'none';
+        // Show the welcome step
+        const welcome = document.getElementById('welcome-step');
+        if (welcome) welcome.style.display = 'flex';
+        // Hide all ballot pages except welcome
+        document.querySelectorAll('.ballot-page').forEach(function(page) {
+          if (page !== welcome) page.style.display = 'none';
+        });
+
+        // Clear all selections on selection buttons and candidate options
+        document.querySelectorAll('.selection-button').forEach(function(btn) {
+          btn.textContent = '';
+        });
+        document.querySelectorAll('.candidate-option.selected').forEach(function(opt) {
+          opt.classList.remove('selected');
+        });
+
+        // Optionally, reset any JS selection state if used
+        if (typeof selections === 'object') {
+          for (let key in selections) {
+            if (Object.prototype.hasOwnProperty.call(selections, key)) {
+              selections[key] = null;
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
+  </body>
+</html>
